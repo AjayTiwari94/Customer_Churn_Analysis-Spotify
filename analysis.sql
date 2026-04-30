@@ -68,6 +68,9 @@ case
 end as churn_status, avg(listening_time) from churning
 group by 1;
 -- churned people have lesser average listening time
+-- churn_status, avg_listening_time
+#  churned       152.9845            
+#  not churned   154.4468
 
 select case
 	when is_churned = 1 then 'churned'
@@ -79,6 +82,9 @@ avg(songs_played_per_day) as avg_songs
 from churning
 group by churn_status;
 -- all value are almost the same, none of the factor is much differntaiting
+-- churn_status, avg_listening_time, avg_skip_rate,        avg_songs
+#  churned       152.9845            0.30486238532110027   50.5756
+#  not churned   154.4468            0.29847360431775594   49.9707
 
 select 
     subscription_type,
@@ -88,6 +94,12 @@ select
 from churning
 group by subscription_type
 order by churn_rate desc;
+
+-- subscription_type, total_users, churned_users, churn_rate
+#  Family             1908         525            27.52
+#  Student            1959         513            26.19
+#  Premium            2115         530            25.06
+#  Free               2018         503            24.93
 
 select case 
 	when ads_listened_per_week > 20 then 'High Ads'
@@ -118,6 +130,7 @@ case
     else 'low risk'
 end as risk_category
 from churning;
+-- printed the data with the category in which the data lie
 
 
 
@@ -177,6 +190,11 @@ end as risk_category
 group by risk_category
 order by churn_rate desc;
 
+-- risk_category, Total_users, churned_users, churn_rate
+ # high risk       492         140           28.46
+ # medium risk     2106        559           26.54
+ # low risk        5402        1372          25.40
+
 select 
     risk_category,
     retention_strategy,
@@ -198,3 +216,7 @@ from (
     from churning
 ) t
 group by risk_category, retention_strategy;
+
+-- 5402 low risk
+-- 2106 medium risk
+-- 492 high risk
