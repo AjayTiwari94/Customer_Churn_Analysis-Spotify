@@ -8,7 +8,7 @@ The objective is to identify users at risk of churn and recommend targeted actio
 ---
 
 ## Objectives
-### To understand the data first and then
+### Understand the data first and then
 - Analyze user engagement and behavior
 - Identify key factors influencing churn
 - Segment users based on churn risk
